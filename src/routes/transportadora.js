@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const mongojs = require('mongojs');
 //const db = mongojs('mean-db',['transporter']);
-var db = mongojs('mean-db')
-var transporter = db.collection('transporter')
-var cars = db.collection('cars')
-
+var db = mongojs('mean-db');
+var transporter = db.collection('transporter');
+var cars = db.collection('cars');
+var flotas = db.collection('flotas');
 
 //#region Conductores
 
@@ -83,9 +83,7 @@ router.put('/transporter/:id', (req, res, next) => {
 
 //#endregion
 
-
-
-//#Conductores
+//#region Conductores
 
 router.get('/cars', (req, res, next) => {
 
@@ -160,4 +158,86 @@ router.put('/cars/:id', (req, res, next) => {
 });
 
 //#endregion
+
+//#region Asignar flotas
+
+router.get('/flotas', (req, res, next) => {
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+
+    db.flotas.find((err, flota) => {
+        if (err) return next(err);
+        res.json(flota);
+    });
+});
+
+router.get('/flotas/:id', (req, res, next) => {
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+
+    db.flotas.findOne({ _id: mongojs.ObjectId(req.params.id) }, (err, result) => {
+        if (err) return next(err);
+        res.json(result);
+    });
+});
+
+router.post('/flotas', (req, res, next) => {
+    const flota = req.body;
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+    if (flota.conductor._id === '') {
+        res.status(400).json({
+            error: 'bad data'
+        });
+    } else {
+        db.flotas.save(flota, (err, result) => {
+            if (err) return next(err);
+            res.json(result);
+        });
+    }
+});
+
+
+router.delete('/flotas/:id', (req, res, next) => {
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+
+    db.flotas.remove({ _id: mongojs.ObjectId(req.params.id) }, (err, result) => {
+        if (err) return next(err);
+        res.json(result);
+    });
+});
+
+
+router.put('/flotas/:id', (req, res, next) => {
+    const flota = req.body;
+    const updateflota = {};
+    updateflota.conductor = flota.conductor;
+    updateflota.vehiculo = flota.vehiculo;
+    updateflota.origen = flota.origen;
+    updateflota.destino = flota.destino;
+    updateflota.vehiculo = flota.vehiculo;
+    updateflota.descripcion = flota.descripcion;
+    updateflota.fecha = flota.fecha;
+    
+    //Validate from server...
+    //Controlar error 400 o 500
+
+    db.flotas.update({ _id: mongojs.ObjectId(req.params.id) }, updateflota, (err, result) => {
+        if (err) return next(err);
+        res.json(result);
+    });
+});
+
+//#endregion
+
+
 module.exports = router; 

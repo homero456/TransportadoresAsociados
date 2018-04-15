@@ -50,6 +50,14 @@ export class UsuariosComponent {
   ngOnInit() {
   }
 
+  newUser(){
+    this.user._id=null;
+    this.user.name = '';
+    this.user.lastName = '';
+    this.user.typeDocument = null;
+    this.user.documentNumber = '';
+  }
+
   addUsuario(event) {
     event.preventDefault();
     if (this.form.valid) {
@@ -66,11 +74,7 @@ export class UsuariosComponent {
         this.transService.addUsers(newUser)
           .subscribe(user => {
             this.users.push(user);
-            this.user._id=null;
-            this.user.name = '';
-            this.user.lastName = '';
-            this.user.typeDocument = null;
-            this.user.documentNumber = '';
+            this.newUser();
             alert("Guardado");
           });
       }else{

@@ -42,6 +42,12 @@ export class VehiculosComponent implements OnInit {
   ngOnInit() {
   }
 
+  newCar(){
+    this.car._id=null;
+    this.car.typecar = '';
+    this.car.placa = '';
+    this.car.descripcion = null;
+  }
 
   addVehiculo(event) {
     event.preventDefault();
@@ -58,10 +64,7 @@ export class VehiculosComponent implements OnInit {
         this.transService.addCars(newCar)
           .subscribe(car => {
             this.cars.push(car);
-            this.car._id=null;
-            this.car.typecar = '';
-            this.car.placa = '';
-            this.car.descripcion = null;
+           this.newCar();
             alert("Guardado");
           });
       }else{

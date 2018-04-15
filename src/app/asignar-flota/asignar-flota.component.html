@@ -1,0 +1,193 @@
+<div class="container">
+
+  <div class="card">
+    <div class="panel-heading">
+      <div class="display-1">Asignar FLota</div>
+      <br>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formAsignarFlota" (submit)="addAsignarFlota($event)">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="conductor">Conductor</label>
+              <select name="conductor" class="form-control" id="conductor" formControlName="conductor" [(ngModel)]="flota.conductor._id">
+                <option *ngFor="let c of conductores" [value]="c._id">{{c.name}}</option>
+              </select>
+              <div *ngIf="formAsignarFlota.controls.conductor.errors  && formAsignarFlota.controls.conductor.dirty">
+                <div *ngIf="formAsignarFlota.controls.conductor.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="vehiculo">Flota</label>
+              <select name="vehiculo" class="form-control" id="vehiculo" formControlName="vehiculo" [(ngModel)]="flota.vehiculo._id">
+                <option *ngFor="let v of vehiculos" [value]="v._id">{{v.placa}}</option>
+
+              </select>
+              <div *ngIf="formAsignarFlota.controls.vehiculo.errors  && formAsignarFlota.controls.vehiculo.dirty">
+                <div *ngIf="formAsignarFlota.controls.vehiculo.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="origen">Origen</label>
+              <select name="origen" class="form-control" id="origen" formControlName="origen" [(ngModel)]="flota.origen">
+                <option value="Cali">Cali</option>
+                <option value="Bogotá">Bogotá</option>
+                <option value="Medellin">Medellin</option>
+                <option value="Popayán">Popayán</option>
+
+              </select>
+              <div *ngIf="formAsignarFlota.controls.origen.errors  && formAsignarFlota.controls.origen.dirty">
+                <div *ngIf="formAsignarFlota.controls.origen.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="destino">Destino</label>
+              <select name="destino" class="form-control" id="destino" formControlName="destino" [(ngModel)]="flota.destino">
+                <option value="Cali">Cali</option>
+                <option value="Bogotá">Bogotá</option>
+                <option value="Medellin">Medellin</option>
+                <option value="Popayán">Popayán</option>
+
+              </select>
+              <div *ngIf="formAsignarFlota.controls.destino.errors  && formAsignarFlota.controls.destino.dirty">
+                <div *ngIf="formAsignarFlota.controls.destino.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="fecha">Fecha</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="flota.fecha" formControlName="fecha" ngbDatepicker
+                  #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJM
+                    SUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3Mv
+                    U1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4
+                    bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3
+                    LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMzQgMjgi
+                    IGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDM0IDI4IiB4bWw6c3BhY2U9InByZXNlcnZlIj4K
+                    PGc+Cgk8Zz4KCQk8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIg
+                    ZmlsbD0iIzQ0NDQ0NCIgZD0iTTMxLDBIM0MxLjMsMCwwLDEuMywwLDN2MjJjMCwxLjcsMS4zLDMs
+                    MywzaDI4YzEuNywwLDMtMS4zLDMtMwoJCQlWM0MzNCwxLjMsMzIuNywwLDMxLDB6IE0zMiwyNWMw
+                    LDAuNi0wLjQsMS0xLDFIM2MtMC42LDAtMS0wLjQtMS0xVjhoMzBWMjV6IE0zMiw2SDJWM2MwLTAu
+                    NiwwLjQtMSwxLTFoMjhjMC42LDAsMSwwLjQsMSwxVjZ6CgkJCSBNOCwxNmMxLjEsMCwyLTAuOSwy
+                    LTJzLTAuOS0yLTItMmMtMS4xLDAtMiwwLjktMiwyUzYuOSwxNiw4LDE2eiBNMTQsMTZjMS4xLDAs
+                    Mi0wLjksMi0ycy0wLjktMi0yLTJjLTEuMSwwLTIsMC45LTIsMgoJCQlTMTIuOSwxNiwxNCwxNnog
+                    TTIwLDE2YzEuMSwwLDItMC45LDItMnMtMC45LTItMi0yYy0xLjEsMC0yLDAuOS0yLDJTMTguOSwx
+                    NiwyMCwxNnogTTI2LDE2YzEuMSwwLDItMC45LDItMnMtMC45LTItMi0yCgkJCWMtMS4xLDAtMiww
+                    LjktMiwyUzI0LjksMTYsMjYsMTZ6IE04LDIyYzEuMSwwLDItMC45LDItMmMwLTEuMS0wLjktMi0y
+                    LTJjLTEuMSwwLTIsMC45LTIsMkM2LDIxLjEsNi45LDIyLDgsMjJ6IE0xNCwyMgoJCQljMS4xLDAs
+                    Mi0wLjksMi0yYzAtMS4xLTAuOS0yLTItMmMtMS4xLDAtMiwwLjktMiwyQzEyLDIxLjEsMTIuOSwy
+                    MiwxNCwyMnogTTIwLDIyYzEuMSwwLDItMC45LDItMmMwLTEuMS0wLjktMi0yLTIKCQkJYy0xLjEs
+                    MC0yLDAuOS0yLDJDMTgsMjEuMSwxOC45LDIyLDIwLDIyeiBNMjYsMjJjMS4xLDAsMi0wLjksMi0y
+                    YzAtMS4xLTAuOS0yLTItMmMtMS4xLDAtMiwwLjktMiwyQzI0LDIxLjEsMjQuOSwyMiwyNiwyMnoi
+                    Lz4KCTwvZz4KPC9nPgo8L3N2Zz4K" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                  </button>
+                </div>
+                <div *ngIf="formAsignarFlota.controls.fecha.errors && formAsignarFlota.controls.fecha.dirty ">
+                  <div *ngIf="formAsignarFlota.controls.fecha.errors.required" class="alert alert-danger">
+                    El campo es requerido
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="descripcion">Descripción</label>
+              <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="descripcion" [(ngModel)]="flota.descripcion">
+              <div *ngIf="formAsignarFlota.controls.descripcion.errors && formAsignarFlota.controls.descripcion.dirty ">
+                <div *ngIf="formAsignarFlota.controls.descripcion.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="formAsignarFlota.controls.descripcion.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="formAsignarFlota.controls.descripcion.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+      <div class="col-md-12" style="text-align: right;">
+        <button type="button" class="btn btn-default" (click)="newFlota()">
+            <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <th>Conductor</th>
+          <th>Flota</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flota of flotas">
+            <td>{{flota.conductor.name}}</td>
+            <td>{{flota.vehiculo.placa}}</td>
+            <td>{{flota.origen}}</td>
+            <td>{{flota.destino}}</td>
+            <td>{{flota.fecha.year}}-{{flota.fecha.month}}-{{flota.fecha.day}}</td>
+            <td>{{flota.descripcion}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="getFlota(flota)">
+                Edit
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteFlota(flota._id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+
+
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
