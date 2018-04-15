@@ -2,6 +2,7 @@ const cors = require('cors');
 const express = require("express");
 const app = express();
 const indexRoute = require('./routes/index');
+const transporterRoute = require('./routes/transportadora');
 
 //configurar puerto
 app.set('port', process.env.PORT || 3000);
@@ -14,6 +15,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 //routes
 app.use(indexRoute);
+app.use('/api',transporterRoute);
+
+//static files
+
+//app.use(express.static(path.join(__dirname,'dist')));
 
 
 app.listen(app.get('port'), () =>{

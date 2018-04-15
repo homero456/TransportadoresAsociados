@@ -2,11 +2,11 @@
 
   <div class="card">
     <div class="panel-heading">
-      <div class="display-1">Usuarios</div>
+      <div class="display-1">Conductor</div>
       <br>
     </div>
     <div class="card-body">
-      <form [formGroup]="form">
+      <form [formGroup]="form" (submit)="addUsuario($event)">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
@@ -77,10 +77,9 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <button type="button" class="btn btn-default" (click)="addUsuario()">Guardar</button>
+            <button type="submit" class="btn btn-default">Guardar</button>
           </div>
         </div>
-        {{users | json}}
       </form>
     </div>
   </div>
@@ -95,9 +94,28 @@
           <th>Apellidos</th>
           <th>Tipo Documento</th>
           <th>Número Documento</th>
+          <th>update</th>
+          <th>delete</th>
         </thead>
         <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.name}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.typeDocument}}</td>
+            <td>{{user.documentNumber}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="getUser(user)">
+                Edit
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteUser(user._id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
 
+
+          </tr>
         </tbody>
 
       </table>

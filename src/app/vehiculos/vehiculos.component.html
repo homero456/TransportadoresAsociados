@@ -1,4 +1,104 @@
-<p>
-  <label>{{data}}</label>
-  <input type="text" id="data" name="data" [(ngModel)]="data" >
-</p>
+<div class="container">
+
+  <div class="card">
+    <div class="panel-heading">
+      <div class="display-1">Vehiculos</div>
+      <br>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formVehiculo" (submit)="addVehiculo($event)">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="typecar">Tipo Vehiculo</label>
+              <select name="typecar" class="form-control" id="typecar" formControlName="typecar" [(ngModel)]="car.typecar">
+                <option value="Automovil">Automovil</option>
+                <option value="Camion">Camion</option>
+                <option value="Lancha">Lancha</option>
+              </select>
+              <div *ngIf="formVehiculo.controls.typecar.errors  && formVehiculo.controls.typecar.dirty">
+                <div *ngIf="formVehiculo.controls.typecar.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="formVehiculo.controls.typecar.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="formVehiculo.controls.typecar.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="Placa">Placa</label>
+              <input type="text" class="form-control" id="placa" name="placa" formControlName="placa" [(ngModel)]="car.placa">
+              <div *ngIf="formVehiculo.controls.placa.errors && formVehiculo.controls.placa.dirty ">
+                <div *ngIf="formVehiculo.controls.placa.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="descripcion">Descripción</label>
+              <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="descripcion" [(ngModel)]="car.descripcion">
+              <div *ngIf="formVehiculo.controls.descripcion.errors && formVehiculo.controls.descripcion.dirty ">
+                <div *ngIf="formVehiculo.controls.descripcion.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="formVehiculo.controls.descripcion.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="formVehiculo.controls.descripcion.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-default">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <th>Tipo Vehículo</th>
+          <th>Placa</th>
+          <th>Descripción</th>
+          
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{car.typecar}}</td>
+            <td>{{car.placa}}</td>
+            <td>{{car.descripcion}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="getCar(car)">
+                Edit
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteCar(car._id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+
+
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
