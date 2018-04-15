@@ -1,0 +1,106 @@
+<div class="container">
+
+  <div class="card">
+    <div class="panel-heading">
+      <div class="display-1">Usuarios</div>
+      <br>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Nombres</label>
+              <input type="text" class="form-control" id="name" name="name" formControlName="name" [(ngModel)]="user.name">
+              <div *ngIf="form.controls.name.errors  && form.controls.name.dirty">
+                <div *ngIf="form.controls.name.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="form.controls.name.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="form.controls.name.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="Apellidos">Apellidos</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" [(ngModel)]="user.lastName">
+              <div *ngIf="form.controls.lastName.errors && form.controls.lastName.dirty ">
+                <div *ngIf="form.controls.lastName.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="form.controls.lastName.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="form.controls.lastName.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="TipoDocumento">Tipo Documento</label>
+              <select name="typeDocument" class="form-control" id="typeDocument" formControlName="typeDocument" [(ngModel)]="user.typeDocument">
+                <option value="CC">Cédula</option>
+                <option value="TI">Tarjeta Identidad</option>
+                <option value="PA">Pasaporte</option>
+              </select>
+              <div *ngIf="form.controls.typeDocument.errors && form.controls.typeDocument.dirty ">
+                <div *ngIf="form.controls.typeDocument.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="Usuario">Número documento</label>
+              <input type="text" class="form-control" id="documentNumber" name="documentNumber" formControlName="documentNumber" [(ngModel)]="user.documentNumber">
+              <div *ngIf="form.controls.documentNumber.errors && form.controls.documentNumber.dirty ">
+                <div *ngIf="form.controls.documentNumber.errors.required" class="alert alert-danger">
+                  El campo es requerido
+                </div>
+                <div *ngIf="form.controls.documentNumber.errors.maxlength" class="alert alert-danger">
+                  El campo requiere máximo 30 caracteres
+                </div>
+                <div *ngIf="form.controls.documentNumber.errors.minlength" class="alert alert-danger">
+                  El campo requiere mínimo 5 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" class="btn btn-default" (click)="addUsuario()">Guardar</button>
+          </div>
+        </div>
+        {{users | json}}
+      </form>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Tipo Documento</th>
+          <th>Número Documento</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
