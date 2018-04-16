@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import "rxjs/Rx";
 import { Usuario } from './models/Usuario';
 import { Vehiculo } from './models/Vehiculo';
 import { FlotaUsuario } from './models/FlotaUsuario';
-
+import { Auditoria } from './models/Auditoria';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class TransporteServiceService {
 
@@ -86,5 +87,32 @@ export class TransporteServiceService {
   }
 
   //#endregion
+
+
+  //#region Auditorias
+  addAuditoria(aud: Auditoria) {
+    return this.http.post<Auditoria>(`${this.domain}/api/auditorias`, aud)
+      .map(res => res);
+  }
+
+  getAuditoria() {
+    return this.http.get<Auditoria[]>(`${this.domain}/api/auditorias`)
+      .map(res => res);
+  }
+  //#endregion
+
+  getIpAddress() {
+    //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http
+      .get('http://freegeoip.net/json/?callback',
+        )
+      .map(response => response || {})
+      .catch(this.handleError);
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<any> {
+    console.error('observable error: ', error);
+    return Observable.throw(error);
+  }
 
 }

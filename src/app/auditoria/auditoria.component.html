@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="card">
+      <div class="panel-heading">
+        <div class="display-1">Auditoria</div>
+        <br>
+      </div>
+      <div class="card-body">
+          <label for="Busqueda">Busqueda</label>
+          <input type="text" class="form-control" id="busqueda" name="busqueda"    [(ngModel)]="busqueda"  (keyup)="filtrar()" >
+      </div>
+    </div>
+    <br>
+    <hr>
+   
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <th>Ip</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+            <th>Módulo</th>            
+          </thead>
+          <tbody>
+            <tr *ngFor="let aud of auditorias">
+              <td>{{aud.ip}}</td>
+              <td>{{aud.usuario}}</td>
+              <td>{{aud.fecha.year}}-{{aud.fecha.month}}-{{aud.fecha.day}}</td>
+              <td>{{aud.accion}}</td>
+              <td>{{aud.module}}</td>
+            </tr>
+          </tbody>
+  
+        </table>
+      </div>
+    </div>
+  </div>

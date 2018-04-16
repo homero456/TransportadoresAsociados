@@ -5,6 +5,7 @@ var db = mongojs('mean-db');
 var transporter = db.collection('transporter');
 var cars = db.collection('cars');
 var flotas = db.collection('flotas');
+var auditorias = db.collection('auditorias');
 
 //#region Conductores
 
@@ -83,7 +84,7 @@ router.put('/transporter/:id', (req, res, next) => {
 
 //#endregion
 
-//#region Conductores
+//#region Vehiculos
 
 router.get('/cars', (req, res, next) => {
 
@@ -239,5 +240,38 @@ router.put('/flotas/:id', (req, res, next) => {
 
 //#endregion
 
+
+//#region Auditorias
+router.get('/auditorias', (req, res, next) => {
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+    db.auditorias.find((err, aud) => {
+        if (err) return next(err);
+        res.json(aud);
+    });
+});
+
+
+router.post('/auditorias', (req, res, next) => {
+    const aud = req.body;
+
+    //Validate from server...
+    //Controlar error 400 o 500
+
+    if (aud.usuario === '') {
+        res.status(400).json({
+            error: 'bad data'
+        });
+    } else {
+        db.auditorias.save(aud, (err, result) => {
+            if (err) return next(err);
+            res.json(result);
+        });
+    }
+});
+
+//#endregion
 
 module.exports = router; 

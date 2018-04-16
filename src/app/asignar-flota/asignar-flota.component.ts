@@ -6,6 +6,7 @@ import { FlotaUsuario } from '../models/FlotaUsuario';
 import { TransporteServiceService } from '../transporte-service.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { Auditoria } from '../models/Auditoria';
 @Component({
   selector: 'app-asignar-flota',
   templateUrl: './asignar-flota.component.html',
@@ -19,12 +20,12 @@ export class AsignarFlotaComponent implements OnInit {
   vehiculos = [];
   conductores = [];
   flotasServer = [];
-
+  ip= "";
   constructor(private fb: FormBuilder, private transService: TransporteServiceService) {
 
     this.flota.conductor = new Usuario();
     this.flota.vehiculo = new Vehiculo();
-
+    
     //load data
     transService.getFlotas().subscribe(flotas => {
       this.flotas = flotas;
@@ -64,9 +65,14 @@ export class AsignarFlotaComponent implements OnInit {
     });
     this.transService.getUsers().subscribe(users => {
       this.conductores = users;
-      console.log(users);
+      
     });
     console.log("init");
+    console.log("ip");
+    this.transService.getIpAddress().subscribe(data => {
+      this.ip=data.ip;
+      this.auditoria('load','Flotas');
+    });
   }
 
 
@@ -117,6 +123,7 @@ export class AsignarFlotaComponent implements OnInit {
               this.flotas.push(resultflota);
               this.newFlota();
               alert("Guardado");
+              this.auditoria('adicionar','Flotas');
             });
         } else {
           //Update
@@ -141,6 +148,7 @@ export class AsignarFlotaComponent implements OnInit {
               this.flotas.splice(i, 1);
             }
           }
+          this.auditoria('delete','Flotas');
         });
     }
     return;
@@ -165,6 +173,8 @@ export class AsignarFlotaComponent implements OnInit {
         this.flota = new FlotaUsuario;
         this.flota.conductor = new Usuario();
         this.flota.vehiculo = new Vehiculo();
+        this.auditoria('update','Flotas');
+
       });
     });
 
@@ -184,11 +194,27 @@ export class AsignarFlotaComponent implements OnInit {
   validarColision(){    
     for(let item of this.flotasServer){
       if( (item.conductor._id  === this.flota.conductor._id || item.vehiculo._id === this.flota.vehiculo._id && item._id != this.flota._id)
-      && item.fecha.get === this.flota.fecha)
+      && item.fecha === this.flota.fecha)
       {
         return true;
       }
-      console.log(this.flota.fecha.getDay());
+      console.log(this.flota.fecha);
    }     
   }
+
+  auditoria(accion,modulo)
+  {
+    const aud: Auditoria = {
+      ip: this.ip,
+      usuario: "fvalencia",
+      fecha: new Date(),
+      accion : accion,
+      module:modulo
+    };
+    this.transService.addAuditoria(aud)
+      .subscribe(result => {
+       
+      });
+  }
+
 }

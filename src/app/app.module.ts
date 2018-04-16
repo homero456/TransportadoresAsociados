@@ -9,13 +9,17 @@ import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { TransporteServiceService } from './transporte-service.service';
 import { AsignarFlotaComponent } from './asignar-flota/asignar-flota.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {Tabs} from '../libs/tabs';
+import {Tab} from '../libs/tab';
+import { AuditoriaComponent } from './auditoria/auditoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuariosComponent,
     VehiculosComponent,
-    AsignarFlotaComponent
+    AsignarFlotaComponent,
+    Tabs, Tab, AuditoriaComponent
   ],
   imports: [
     BrowserModule,
@@ -23,10 +27,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+   
     
   ],
   providers: [TransporteServiceService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+
+ }
